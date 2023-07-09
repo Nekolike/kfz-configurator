@@ -1,11 +1,11 @@
-INSERT INTO car_classes (class, price) VALUES
+INSERT INTO car_classes (car_class, price) VALUES
     ('C-Klasse', 0),
     ('E-Klasse', 6000),
     ('EQB', 5000),
     ('G-Klasse', 60000),
     ('AMG', 50000);
 
-INSERT INTO car_types (type, price) VALUES
+INSERT INTO car_types (car_type, price) VALUES
     ('cabriolet', 54430),
     ('limousine', 53823),
     ('suv', 55550),

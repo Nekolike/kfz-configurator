@@ -1,12 +1,12 @@
 CREATE TABLE car_classes (
     id SERIAL PRIMARY KEY,
-    class VARCHAR(255),
+    car_class VARCHAR(255),
     price INTEGER
 );
 
 CREATE TABLE car_types (
     id SERIAL PRIMARY KEY,
-    type VARCHAR(100),
+    car_type VARCHAR(100),
     price INTEGER
 );
 
