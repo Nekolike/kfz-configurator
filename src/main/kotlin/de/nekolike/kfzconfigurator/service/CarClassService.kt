@@ -17,7 +17,7 @@ class CarClassService(val carClassRepository: CarClassRepository) {
                 CarClassDTO(
                 carClass.carClass,
                 carClass.price
-            )
+                )
             )
         }
 
