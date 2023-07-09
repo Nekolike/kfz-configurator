@@ -6,18 +6,18 @@ INSERT INTO car_classes (car_class, price) VALUES
     ('AMG', 50000);
 
 INSERT INTO car_types (car_type, price) VALUES
-    ('cabriolet', 54430),
-    ('limousine', 53823),
-    ('suv', 55550),
-    ('geländewagen', 118256),
-    ('coupé', 102518);
+    ('Cabriolet', 54430),
+    ('Limousine', 53823),
+    ('SUV', 55550),
+    ('Geländewagen', 118256),
+    ('Coupé', 102518);
 
 INSERT INTO colors (color, price) VALUES
-    ('rot', 1400),
-    ('grün', 0),
-    ('silber', 1071),
-    ('schwarz', 0),
-    ('gelb', 1600);
+    ('Rot', 1400),
+    ('Grün', 0),
+    ('Silber', 1071),
+    ('Schwarz', 0),
+    ('Gelb', 1600);
 
 INSERT INTO engine_power (kw, price) VALUES
     (150, 2000),
