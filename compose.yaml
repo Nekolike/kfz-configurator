@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    container_name: psql-db
+    restart: always
+    environment:
+      - POSTGRES_USER=nekolike
+      - POSTGRES_PASSWORD=mercedes
+      - POSTGRES_DB=kfzconfigurator
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
+
+volumes:
+  postgres_dev:
