@@ -1,10 +1,6 @@
 package de.nekolike.kfzconfigurator.controller
 
-import de.nekolike.kfzconfigurator.dto.CarClassDTO
-import de.nekolike.kfzconfigurator.dto.CarTypeDTO
-import de.nekolike.kfzconfigurator.dto.ColorDTO
-import de.nekolike.kfzconfigurator.dto.EnginePowerDTO
-import de.nekolike.kfzconfigurator.dto.OptionalEquipmentDTO
+import de.nekolike.kfzconfigurator.dto.KfzConfigurationDTO
 import de.nekolike.kfzconfigurator.service.CarClassService
 import de.nekolike.kfzconfigurator.service.CarTypeService
 import de.nekolike.kfzconfigurator.service.ColorService
@@ -22,28 +18,12 @@ class KfzConfiguratorController(
     val optionalEquipmentService: OptionalEquipmentService,
 )
 {
-    @GetMapping("/cartypes")
-    fun getCarTypes(): List<CarTypeDTO> {
-        return carTypeService.getCarTypes()
-    }
-
-    @GetMapping("/carclasses")
-    fun getCarClasses(): List<CarClassDTO> {
-        return carClassService.getCarClasses()
-    }
-
-    @GetMapping("/colors")
-    fun getColors(): List<ColorDTO> {
-        return colorService.getColors()
-    }
-
-    @GetMapping("/enginepowers")
-    fun getEnginePowers(): List<EnginePowerDTO> {
-        return enginePowerService.getEnginePowers()
-    }
-
-    @GetMapping("/optionalequipment")
-    fun getOptionalEquipment(): List<OptionalEquipmentDTO> {
-        return optionalEquipmentService.getOptionalEquipment()
-    }
+    @GetMapping("/kfzconfiguration")
+    fun getKfzConfiguration() = KfzConfigurationDTO(
+        carTypes = carTypeService.getCarTypes(),
+        carClasses = carClassService.getCarClasses(),
+        colors = colorService.getColors(),
+        enginePowers = enginePowerService.getEnginePowers(),
+        optionalEquipment = optionalEquipmentService.getOptionalEquipment()
+    )
 }
