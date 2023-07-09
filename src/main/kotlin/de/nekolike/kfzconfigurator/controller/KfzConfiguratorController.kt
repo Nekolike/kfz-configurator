@@ -4,10 +4,12 @@ import de.nekolike.kfzconfigurator.dto.CarClassDTO
 import de.nekolike.kfzconfigurator.dto.CarTypeDTO
 import de.nekolike.kfzconfigurator.dto.ColorDTO
 import de.nekolike.kfzconfigurator.dto.EnginePowerDTO
+import de.nekolike.kfzconfigurator.dto.OptionalEquipmentDTO
 import de.nekolike.kfzconfigurator.service.CarClassService
 import de.nekolike.kfzconfigurator.service.CarTypeService
 import de.nekolike.kfzconfigurator.service.ColorService
 import de.nekolike.kfzconfigurator.service.EnginePowerService
+import de.nekolike.kfzconfigurator.service.OptionalEquipmentService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -17,6 +19,7 @@ class KfzConfiguratorController(
     val carClassService: CarClassService,
     val colorService: ColorService,
     val enginePowerService: EnginePowerService,
+    val optionalEquipmentService: OptionalEquipmentService,
 )
 {
     @GetMapping("/cartypes")
@@ -37,5 +40,10 @@ class KfzConfiguratorController(
     @GetMapping("/enginepowers")
     fun getEnginePowers(): List<EnginePowerDTO> {
         return enginePowerService.getEnginePowers()
+    }
+
+    @GetMapping("/optionalequipment")
+    fun getOptionalEquipment(): List<OptionalEquipmentDTO> {
+        return optionalEquipmentService.getOptionalEquipment()
     }
 }
