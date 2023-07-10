@@ -2,6 +2,8 @@ package de.nekolike.kfzconfigurator.persistence
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 
@@ -9,7 +11,9 @@ import jakarta.persistence.Table
 @Table(name = "car_classes")
 data class CarClass(
     @Id
-    val id: Long,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "car_class_id")
+    val carClassId: Long,
 
     @Column(name = "car_class")
     val carClass: String,
