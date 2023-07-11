@@ -26,11 +26,11 @@ class UserService(val userRepository: UserRepository) {
     fun canLoginUser(userDTORequest: UserDTORequest): LoginUserResult {
         val optionalUser = userRepository.findByUserName(userDTORequest.userDTO.userName)
         if(optionalUser.isEmpty) {
-            return LoginUserResult(false, "User with username ${userDTORequest.userDTO.userName} doesn't exist")
+            return LoginUserResult(false, "User with username ${userDTORequest.userDTO.userName} doesn't exist", null)
         } else if(optionalUser.get().password != userDTORequest.userDTO.password) {
-            return LoginUserResult(false, "Password is incorrect")
+            return LoginUserResult(false, "Password is incorrect", null)
         }
 
-        return LoginUserResult(true, null)
+        return LoginUserResult(true, null, optionalUser.get().userId)
     }
 }
