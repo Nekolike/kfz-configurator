@@ -16,7 +16,7 @@ class UserService(val userRepository: UserRepository) {
         userRepository.save(
             User(
                 userName = userDTORequest.userDTO.userName,
-                password = userDTORequest.userDTO.password
+                password = userDTORequest.userDTO.password!!
             )
         )
 
