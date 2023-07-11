@@ -1,7 +1,7 @@
-package de.nekolike.kfzconfigurator.repository
+package de.nekolike.kfzconfigurator.persistence.repository
 
-import de.nekolike.kfzconfigurator.persistence.SavedKfzConfiguration
-import de.nekolike.kfzconfigurator.persistence.User
+import de.nekolike.kfzconfigurator.persistence.domain.SavedKfzConfiguration
+import de.nekolike.kfzconfigurator.persistence.domain.User
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Optional
 

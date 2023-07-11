@@ -1,6 +1,6 @@
-package de.nekolike.kfzconfigurator.repository
+package de.nekolike.kfzconfigurator.persistence.repository
 
-import de.nekolike.kfzconfigurator.persistence.Color
+import de.nekolike.kfzconfigurator.persistence.domain.Color
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Optional
 

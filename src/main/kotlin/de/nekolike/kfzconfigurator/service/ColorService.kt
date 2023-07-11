@@ -1,8 +1,8 @@
 package de.nekolike.kfzconfigurator.service
 
 import de.nekolike.kfzconfigurator.dto.ColorDTO
-import de.nekolike.kfzconfigurator.persistence.Color
-import de.nekolike.kfzconfigurator.repository.ColorRepository
+import de.nekolike.kfzconfigurator.persistence.domain.Color
+import de.nekolike.kfzconfigurator.persistence.repository.ColorRepository
 import org.springframework.stereotype.Service
 
 @Service

@@ -1,8 +1,8 @@
 package de.nekolike.kfzconfigurator.service
 
 import de.nekolike.kfzconfigurator.dto.CarTypeDTO
-import de.nekolike.kfzconfigurator.persistence.CarType
-import de.nekolike.kfzconfigurator.repository.CarTypeRepository
+import de.nekolike.kfzconfigurator.persistence.domain.CarType
+import de.nekolike.kfzconfigurator.persistence.repository.CarTypeRepository
 import org.springframework.stereotype.Service
 
 @Service

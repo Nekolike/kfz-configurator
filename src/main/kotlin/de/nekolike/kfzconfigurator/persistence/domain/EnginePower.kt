@@ -1,4 +1,4 @@
-package de.nekolike.kfzconfigurator.persistence
+package de.nekolike.kfzconfigurator.persistence.domain
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -8,15 +8,14 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "car_classes")
-data class CarClass(
+@Table(name = "engine_power")
+class EnginePower(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "car_class_id")
-    val carClassId: Long,
+    @Column(name = "engine_power_id")
+    val enginePowerId: Long,
 
-    @Column(name = "car_class")
-    val carClass: String,
+    val kw: Int,
 
     val price: Int
 )

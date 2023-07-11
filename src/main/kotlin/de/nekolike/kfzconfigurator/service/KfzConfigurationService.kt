@@ -3,15 +3,15 @@ package de.nekolike.kfzconfigurator.service
 import de.nekolike.kfzconfigurator.dto.KfzConfigurationDTO
 import de.nekolike.kfzconfigurator.dto.SavedKfzConfigurationDTO
 import de.nekolike.kfzconfigurator.dto.SavedKfzConfigurationDTORequest
-import de.nekolike.kfzconfigurator.persistence.SavedKfzConfiguration
-import de.nekolike.kfzconfigurator.persistence.User
-import de.nekolike.kfzconfigurator.repository.CarClassRepository
-import de.nekolike.kfzconfigurator.repository.CarTypeRepository
-import de.nekolike.kfzconfigurator.repository.ColorRepository
-import de.nekolike.kfzconfigurator.repository.EnginePowerRepository
-import de.nekolike.kfzconfigurator.repository.OptionalEquipmentRepository
-import de.nekolike.kfzconfigurator.repository.SavedKfzConfigurationRepository
-import de.nekolike.kfzconfigurator.repository.UserRepository
+import de.nekolike.kfzconfigurator.persistence.domain.SavedKfzConfiguration
+import de.nekolike.kfzconfigurator.persistence.domain.User
+import de.nekolike.kfzconfigurator.persistence.repository.CarClassRepository
+import de.nekolike.kfzconfigurator.persistence.repository.CarTypeRepository
+import de.nekolike.kfzconfigurator.persistence.repository.ColorRepository
+import de.nekolike.kfzconfigurator.persistence.repository.EnginePowerRepository
+import de.nekolike.kfzconfigurator.persistence.repository.OptionalEquipmentRepository
+import de.nekolike.kfzconfigurator.persistence.repository.SavedKfzConfigurationRepository
+import de.nekolike.kfzconfigurator.persistence.repository.UserRepository
 import de.nekolike.kfzconfigurator.result.SaveKfzConfigurationResult
 import org.springframework.stereotype.Service
 

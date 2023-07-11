@@ -1,8 +1,8 @@
 package de.nekolike.kfzconfigurator.service
 
 import de.nekolike.kfzconfigurator.dto.OptionalEquipmentDTO
-import de.nekolike.kfzconfigurator.persistence.OptionalEquipment
-import de.nekolike.kfzconfigurator.repository.OptionalEquipmentRepository
+import de.nekolike.kfzconfigurator.persistence.domain.OptionalEquipment
+import de.nekolike.kfzconfigurator.persistence.repository.OptionalEquipmentRepository
 import org.springframework.stereotype.Service
 
 @Service

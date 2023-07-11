@@ -1,4 +1,4 @@
-package de.nekolike.kfzconfigurator.persistence
+package de.nekolike.kfzconfigurator.persistence.domain
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

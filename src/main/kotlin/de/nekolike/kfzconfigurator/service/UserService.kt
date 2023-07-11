@@ -1,8 +1,8 @@
 package de.nekolike.kfzconfigurator.service
 
 import de.nekolike.kfzconfigurator.dto.UserDTORequest
-import de.nekolike.kfzconfigurator.persistence.User
-import de.nekolike.kfzconfigurator.repository.UserRepository
+import de.nekolike.kfzconfigurator.persistence.domain.User
+import de.nekolike.kfzconfigurator.persistence.repository.UserRepository
 import de.nekolike.kfzconfigurator.result.LoginUserResult
 import de.nekolike.kfzconfigurator.result.SaveUserResult
 import org.springframework.stereotype.Service
