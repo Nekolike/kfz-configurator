@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-application:
+  publish:
     runs-on: ubuntu-latest
     env:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -23,4 +23,4 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build application
-        run: ./gradlew jib --project-prop dockerhub.username=${{ env.DOCKERHUB_USERNAME }} dockerhub.password=${{ env.DOCKERHUB_PASSWORD }}
+        run: ./gradlew jib -Pdockerhub.username=${{ env.DOCKERHUB_USERNAME }} -Pdockerhub.password=${{ env.DOCKERHUB_PASSWORD }}
