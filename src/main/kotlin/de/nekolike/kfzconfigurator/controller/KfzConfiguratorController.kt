@@ -3,6 +3,7 @@ package de.nekolike.kfzconfigurator.controller
 import de.nekolike.kfzconfigurator.dto.SavedKfzConfigurationDTORequest
 import de.nekolike.kfzconfigurator.result.SaveKfzConfigurationResult
 import de.nekolike.kfzconfigurator.service.KfzConfigurationService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
@@ -28,6 +29,11 @@ class KfzConfiguratorController(
         request: SavedKfzConfigurationDTORequest
     ): ResponseEntity<SaveKfzConfigurationResult> {
         val saveResult = kfzConfigurationService.saveKfzConfiguration(request)
-        return ResponseEntity.ok(saveResult)
+
+        return if(saveResult.success) {
+            ResponseEntity.status(HttpStatus.CREATED).body(saveResult)
+        } else {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(saveResult)
+        }
     }
 }
