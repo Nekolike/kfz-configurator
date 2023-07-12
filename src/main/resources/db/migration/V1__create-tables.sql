@@ -40,6 +40,14 @@ CREATE TABLE saved_kfz_configurations (
     car_type_id INT REFERENCES car_types (car_type_id),
     color_id INT REFERENCES colors (color_id),
     engine_power_id INT REFERENCES engine_power (engine_power_id),
-    optional_equipment_id INT REFERENCES optional_equipment (optional_equipment_id),
     user_id INT REFERENCES users (user_id)
 );
+
+CREATE TABLE saved_kfz_configuration_optional_equipment (
+    saved_kfz_configuration_id INT NOT NULL,
+    optional_equipment_id INT NOT NULL,
+    PRIMARY KEY (saved_kfz_configuration_id, optional_equipment_id),
+    FOREIGN KEY (saved_kfz_configuration_id) REFERENCES saved_kfz_configurations(saved_kfz_configuration_id),
+    FOREIGN KEY (optional_equipment_id) REFERENCES optional_equipment(optional_equipment_id)
+);
+

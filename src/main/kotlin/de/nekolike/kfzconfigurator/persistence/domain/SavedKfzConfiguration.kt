@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 
@@ -33,9 +35,13 @@ data class SavedKfzConfiguration(
     @JoinColumn(name = "engine_power_id")
     val enginePower: EnginePower,
 
-    @ManyToOne
-    @JoinColumn(name = "optional_equipment_id")
-    val optionalEquipment: OptionalEquipment,
+    @ManyToMany
+    @JoinTable(
+        name = "saved_kfz_configuration_optional_equipment",
+        joinColumns = [JoinColumn(name = "saved_kfz_configuration_id")],
+        inverseJoinColumns = [JoinColumn(name = "optional_equipment_id")]
+    )
+    val optionalEquipment: MutableSet<OptionalEquipment> = mutableSetOf(),
 
     @ManyToOne
     @JoinColumn(name = "user_id")

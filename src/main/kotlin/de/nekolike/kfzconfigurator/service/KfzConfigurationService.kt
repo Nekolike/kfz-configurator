@@ -3,6 +3,7 @@ package de.nekolike.kfzconfigurator.service
 import de.nekolike.kfzconfigurator.dto.KfzConfigurationDTO
 import de.nekolike.kfzconfigurator.dto.SavedKfzConfigurationDTO
 import de.nekolike.kfzconfigurator.dto.SavedKfzConfigurationDTORequest
+import de.nekolike.kfzconfigurator.persistence.domain.OptionalEquipment
 import de.nekolike.kfzconfigurator.persistence.domain.SavedKfzConfiguration
 import de.nekolike.kfzconfigurator.persistence.domain.User
 import de.nekolike.kfzconfigurator.persistence.repository.CarClassRepository
@@ -45,12 +46,17 @@ class KfzConfigurationService(
         val savedKfzConfigurationDTOs = mutableListOf<SavedKfzConfigurationDTO>()
 
         for (savedKfzConfiguration in savedKfzConfigurations) {
+            val setOfOptionalEquipment: MutableSet<String> = mutableSetOf()
+            for(optionalEquipment in savedKfzConfiguration.optionalEquipment) {
+                setOfOptionalEquipment.add(optionalEquipment.equipment)
+            }
+
             savedKfzConfigurationDTOs.add(SavedKfzConfigurationDTO(
                 carType = savedKfzConfiguration.carType.carType,
                 carClass = savedKfzConfiguration.carClass.carClass,
                 color = savedKfzConfiguration.color.color,
                 kw = savedKfzConfiguration.enginePower.kw,
-                optionalEquipment = savedKfzConfiguration.optionalEquipment.equipment
+                optionalEquipment = setOfOptionalEquipment,
             ))
         }
 
@@ -93,19 +99,29 @@ class KfzConfigurationService(
         val carClass = carClassRepository.findByCarClass(savedKfzConfigurationDTO.carClass)
         val color = colorRepository.findByColor(savedKfzConfigurationDTO.color)
         val enginePower = enginePowerRepository.findByKw(savedKfzConfigurationDTO.kw)
-        val optionalEquipment = optionalEquipmentRepository.findByEquipment(savedKfzConfigurationDTO.optionalEquipment)
+
+        val setOfOptionalEquipment: MutableSet<OptionalEquipment> = mutableSetOf()
+        for (optionalEquipment in savedKfzConfigurationDTO.optionalEquipment) {
+            setOfOptionalEquipment.add(optionalEquipmentRepository.findByEquipment(optionalEquipment).get())
+        }
+
         val user = userRepository.findByUserName(userDTO.userName)
 
         val result = try {
-            SavedKfzConfiguration(
+            val savedKfzConfiguration = SavedKfzConfiguration(
                 savedKfzConfigurationId = savedKfzConfigurationId,
                 carType = carType.get(),
                 carClass = carClass.get(),
                 color = color.get(),
                 enginePower = enginePower.get(),
-                optionalEquipment = optionalEquipment.get(),
                 user = user.get()
             )
+
+            for (optionalEquipment in setOfOptionalEquipment) {
+                savedKfzConfiguration.optionalEquipment.add(optionalEquipment)
+            }
+
+            savedKfzConfiguration
         } catch (ex: NoSuchElementException) {
             throw  NoSuchElementException()
         }

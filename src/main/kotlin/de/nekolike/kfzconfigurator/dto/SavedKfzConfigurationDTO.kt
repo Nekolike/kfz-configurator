@@ -5,7 +5,7 @@ data class SavedKfzConfigurationDTO(
     val carType: String,
     val color: String,
     val kw: Int,
-    val optionalEquipment: String,
+    val optionalEquipment: Set<String>,
 )
 
 data class SavedKfzConfigurationDTORequest(
