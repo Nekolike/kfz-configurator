@@ -58,6 +58,34 @@ class KfzConfigurationService(
     }
 
     fun saveKfzConfiguration(savedKfzConfigurationDTORequest: SavedKfzConfigurationDTORequest): SaveKfzConfigurationResult {
+        val kfzConfigurationToSave = try {
+            createKfzConfigurationToSave(savedKfzConfigurationDTORequest)
+        } catch (ex: NoSuchElementException) {
+            return SaveKfzConfigurationResult(false, "Couldn't save kfz configuration since one or more configuration items aren't valid options")
+        }
+
+        val result = savedKfzConfigurationRepository.save(kfzConfigurationToSave)
+
+        return SaveKfzConfigurationResult(success = true, savedKfzConfigurationId = result.savedKfzConfigurationId)
+    }
+
+    fun updateKfzConfiguration(savedKfzConfigurationDTORequest: SavedKfzConfigurationDTORequest, savedKfzConfigurationId: Long): SaveKfzConfigurationResult {
+        val kfzConfigurationToSave = try {
+             createKfzConfigurationToSave(savedKfzConfigurationDTORequest, savedKfzConfigurationId)
+        } catch (ex: NoSuchElementException) {
+            return SaveKfzConfigurationResult(false, "Couldn't save kfz configuration since one or more configuration items aren't valid options")
+        }
+
+        val result = savedKfzConfigurationRepository.save(kfzConfigurationToSave)
+
+        return SaveKfzConfigurationResult(success = true, savedKfzConfigurationId = result.savedKfzConfigurationId)
+    }
+
+    private fun createKfzConfigurationToSave(savedKfzConfigurationDTORequest: SavedKfzConfigurationDTORequest): SavedKfzConfiguration {
+        return createKfzConfigurationToSave(savedKfzConfigurationDTORequest, null)
+    }
+
+    private fun createKfzConfigurationToSave(savedKfzConfigurationDTORequest: SavedKfzConfigurationDTORequest, savedKfzConfigurationId: Long?): SavedKfzConfiguration {
         val savedKfzConfigurationDTO = savedKfzConfigurationDTORequest.savedKfzConfigurationDTO
         val userDTO = savedKfzConfigurationDTORequest.userDTO
 
@@ -67,10 +95,10 @@ class KfzConfigurationService(
         val enginePower = enginePowerRepository.findByKw(savedKfzConfigurationDTO.kw)
         val optionalEquipment = optionalEquipmentRepository.findByEquipment(savedKfzConfigurationDTO.optionalEquipment)
         val user = userRepository.findByUserName(userDTO.userName)
-        val result: SavedKfzConfiguration
 
-        try {
-            val kfzConfigurationToSave = SavedKfzConfiguration(
+        val result = try {
+            SavedKfzConfiguration(
+                savedKfzConfigurationId = savedKfzConfigurationId,
                 carType = carType.get(),
                 carClass = carClass.get(),
                 color = color.get(),
@@ -78,14 +106,10 @@ class KfzConfigurationService(
                 optionalEquipment = optionalEquipment.get(),
                 user = user.get()
             )
-
-            result = savedKfzConfigurationRepository.save(kfzConfigurationToSave)
-
         } catch (ex: NoSuchElementException) {
-            return SaveKfzConfigurationResult(false, "Couldn't save kfz configuration since one or more configuration items aren't valid options")
+            throw  NoSuchElementException()
         }
 
-
-        return SaveKfzConfigurationResult(success = true, savedKfzConfigurationId = result.savedKfzConfigurationId)
+        return result
     }
 }

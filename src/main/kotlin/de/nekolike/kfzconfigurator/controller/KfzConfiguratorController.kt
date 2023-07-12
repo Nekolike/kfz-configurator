@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -34,6 +35,21 @@ class KfzConfiguratorController(
             ResponseEntity.status(HttpStatus.CREATED).body(saveResult)
         } else {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(saveResult)
+        }
+    }
+
+    @PutMapping("/saveConfiguration/{savedKfzConfigurationId}")
+    fun updateKfzConfiguration(
+        @RequestBody @Validated
+        request: SavedKfzConfigurationDTORequest,
+        @PathVariable savedKfzConfigurationId: Long
+    ): ResponseEntity<SaveKfzConfigurationResult> {
+        val updateResult = kfzConfigurationService.updateKfzConfiguration(request, savedKfzConfigurationId)
+
+        return if(updateResult.success) {
+            ResponseEntity.status(HttpStatus.CREATED).body(updateResult)
+        } else {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(updateResult)
         }
     }
 }
