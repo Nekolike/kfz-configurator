@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
 plugins {
 	id("org.springframework.boot") version "3.1.1"
 	id("io.spring.dependency-management") version "1.1.0"
@@ -52,9 +53,6 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-val dockerhubUsername = project.properties["dockerhub.username"] as String?
-val dockerhubPassword = project.properties["dockerhub.password"] as String?
-
 jib {
 	var tag = "latest"
 	from {
@@ -64,8 +62,8 @@ jib {
 		image = "registry.hub.docker.com/nekolike/kfz-configurator"
 		tags = setOf(version, tag) as MutableSet<String>
 		auth {
-			username = dockerhubUsername
-			password = dockerhubPassword
+			username = project.property("dockerhub.username") as String?
+			password = project.property("dockerhub.password") as String?
 		}
 	}
 	container {
