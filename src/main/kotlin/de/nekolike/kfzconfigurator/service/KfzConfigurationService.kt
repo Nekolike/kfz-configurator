@@ -67,6 +67,7 @@ class KfzConfigurationService(
         val enginePower = enginePowerRepository.findByKw(savedKfzConfigurationDTO.kw)
         val optionalEquipment = optionalEquipmentRepository.findByEquipment(savedKfzConfigurationDTO.optionalEquipment)
         val user = userRepository.findByUserName(userDTO.userName)
+        val result: SavedKfzConfiguration
 
         try {
             val kfzConfigurationToSave = SavedKfzConfiguration(
@@ -78,11 +79,13 @@ class KfzConfigurationService(
                 user = user.get()
             )
 
-            savedKfzConfigurationRepository.save(kfzConfigurationToSave)
+            result = savedKfzConfigurationRepository.save(kfzConfigurationToSave)
+
         } catch (ex: NoSuchElementException) {
             return SaveKfzConfigurationResult(false, "Couldn't save kfz configuration since one or more configuration items aren't valid options")
         }
 
-        return SaveKfzConfigurationResult(true, null)
+
+        return SaveKfzConfigurationResult(success = true, savedKfzConfigurationId = result.savedKfzConfigurationId)
     }
 }
