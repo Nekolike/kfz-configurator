@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.1.1"
 	id("io.spring.dependency-management") version "1.1.0"
 	id("com.avast.gradle.docker-compose") version "0.16.12"
+	id("com.google.cloud.tools.jib") version "3.3.1"
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
 	kotlin("plugin.jpa") version "1.8.22"
@@ -46,4 +47,23 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+jib {
+	var tag = "latest"
+	from {
+		image = "openjdk:17-oracle"
+	}
+	to {
+		image = "registry.hub.docker.com/nekolike/kfz-configurator"
+		tags = setOf(version, tag) as MutableSet<String>
+	}
+	container {
+		jvmFlags = listOf(
+			"-server",
+			"-Duser.timezone=UTC",
+			"-Xms128m",
+			"-Xmx1g"
+		)
+	}
 }
