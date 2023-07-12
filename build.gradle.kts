@@ -52,6 +52,9 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+val dockerhubUsername = project.properties["dockerhub.username"] as String?
+val dockerhubPassword = project.properties["dockerhub.password"] as String?
+
 jib {
 	var tag = "latest"
 	from {
@@ -60,6 +63,10 @@ jib {
 	to {
 		image = "registry.hub.docker.com/nekolike/kfz-configurator"
 		tags = setOf(version, tag) as MutableSet<String>
+		auth {
+			username = dockerhubUsername
+			password = dockerhubPassword
+		}
 	}
 	container {
 		jvmFlags = listOf(
